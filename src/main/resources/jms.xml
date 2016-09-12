@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:amq="http://activemq.apache.org/schema/core"
+    xmlns:jms="http://www.springframework.org/schema/jms"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.5.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd">
+  
+    <context:property-placeholder location="classpath*:jms.properties" ignore-unresolvable="true"/>
+
+    <!-- creates an activemq connection factory using the amq namespace -->
+    <!--
+    <amq:connectionFactory id="amqConnectionFactory" brokerURL="${jms.url}" userName="${jms.username}" password="${jms.password}" />
+    -->
+    <!--<context:property-placeholder location="${CFG_HOME}/jms.properties"  ignore-unresolvable="true"/>-->
+    
+    <!-- CachingConnectionFactory Definition, sessionCacheSize property is the number of sessions to cache -->
+    <bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory"  destroy-method="stop">
+        <property name="maxConnections" value="100" />
+        <property name="maximumActive" value="500" />
+        <property name="connectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL">
+                    <value>${jms.url}</value>
+                </property>
+                  <property name="userName">
+                    <value>${jms.username}</value>
+                </property>
+                  <property name="password">
+                    <value>${jms.password}</value>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    
+    <!-- JmsTemplate Definition -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <constructor-arg ref="jmsFactory" />
+        <property name="sessionTransacted" value="false"/>
+        <property name="receiveTimeout" value="30000"/>
+    </bean>
+    
+    <!-- listener container definition using the jms namespace, concurrency is the max number of concurrent listeners that can be started -->
+    <jms:listener-container connection-factory="jmsFactory" concurrency="10">
+        <jms:listener id="QueueTBSmsListener" destination="${queue.smsForTB}" ref="queueTBSmsListener" />
+        <jms:listener id="QueueTFBSmsListener" destination="${queue.smsForTFB}" ref="queueTFBSmsListener" />
+        <jms:listener id="QueueMDSmsListener" destination="${queue.smsForMD}" ref="queueMDSmsListener" />
+        <jms:listener id="QueueYTBSmsListener" destination="${queue.smsForYTB}" ref="queueYTBSmsListener" />
+        <jms:listener id="QueueDuoWanSmsListener" destination="${queue.smsForDuoWan}" ref="queueDuoWanSmsListener" />
+    </jms:listener-container>
+    <bean id="queueTBSmsListener" class="com.buybal.queues.listener.QueueTBSmsListener">
+        <property name="sendSmsService" ref="sendSmsService" />
+    </bean>
+    <bean id="queueTFBSmsListener" class="com.buybal.queues.listener.QueueTFBSmsListener">
+        <property name="sendSmsService" ref="sendSmsService" />
+    </bean>
+     <bean id="queueMDSmsListener" class="com.buybal.queues.listener.QueueMDSmsListener">
+        <property name="sendSmsService" ref="sendSmsService" />
+    </bean>
+     <bean id="queueYTBSmsListener" class="com.buybal.queues.listener.QueueYTBSmsListener">
+        <property name="sendSmsService" ref="sendSmsService" />
+    </bean>
+         <bean id="queueDuoWanSmsListener" class="com.buybal.queues.listener.QueueDuoWanSmsListener">
+        <property name="sendSmsService" ref="sendSmsService" />
+    </bean>
+	<!-- Send SMS -->
+	<bean id="sendSmsService" class="com.buybal.queues.service.SendSmsService">
+    </bean>
+
+</beans>

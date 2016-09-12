@@ -1,0 +1,17 @@
+20150410115613 0    [main] INFO  com.buybal.queues.service.SendSmsService  - 多玩短信通道发送内容http://sms.duowan.com/send/smssending_emay.jsp?userid=50012932&phone=13521560169&subuser=05010100&time=20150410115613&mac=756a8ee7add2f32773dc97a2e08310a3&content=%E6%82%A8%E5%A5%BD%7E%E5%B0%9A%E8%85%BE%E9%A3%9E%28%E7%99%BE%E5%8D%9A%E6%97%B6%E4%BB%A3%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%29%C2%B7%C2%B7%C2%B7
+20150410115613 376  [main] INFO  com.buybal.queues.service.SendSmsService  - 发送短信to:13521560169, 内容:您好~尚腾飞(百博时代科技有限公司)···, 状态:发送成功返回内容为1表示发送成功:result=[-1]
+20150410115849 0    [main] INFO  com.buybal.queues.common.HttpRequester  - POST url-: http://sdk2.zucp.net:8060/webservice.asmx/mt
+20150410115849 3    [main] INFO  com.buybal.queues.common.HttpRequester  - httpRequester to service send  url --: http://sdk2.zucp.net:8060/webservice.asmx/mt
+20150410115850 219  [main] INFO  com.buybal.queues.service.SendSmsService  - 发送短信to:13521560169内容：您好~尚腾飞(百博时代科技有限公司)··· [通邦支付]状态：发送成功返回内容：<?xml version="1.0" encoding="utf-8"?>
+<string xmlns="http://tempuri.org/">1011584234337401</string>
+
+20150410120335 0    [main] INFO  com.buybal.queues.common.HttpRequester  - POST url-: http://sdk2.zucp.net:8060/webservice.asmx/mt
+20150410120335 3    [main] INFO  com.buybal.queues.common.HttpRequester  - httpRequester to service send  url --: http://sdk2.zucp.net:8060/webservice.asmx/mt
+20150410120335 133  [main] INFO  com.buybal.queues.service.SendSmsService  - 发送短信to:13521560169内容：你好，移动通信公司现在将对您的手机进行线路检测，请您暂时关闭手机3小时！！！！    尚腾飞测试【百博时代科技】~~~~~ [通邦支付]状态：发送成功返回内容：<?xml version="1.0" encoding="utf-8"?>
+<string xmlns="http://tempuri.org/">10120327153752376</string>
+
+20150410120512 0    [main] INFO  com.buybal.queues.common.HttpRequester  - POST url-: http://sdk2.zucp.net:8060/webservice.asmx/mt
+20150410120512 16   [main] INFO  com.buybal.queues.common.HttpRequester  - httpRequester to service send  url --: http://sdk2.zucp.net:8060/webservice.asmx/mt
+20150410120513 140  [main] INFO  com.buybal.queues.service.SendSmsService  - 发送短信to:18679453776内容：你好，移动通信公司现在将对您的手机进行线路检测，请您暂时关闭手机3小时！！！！    尚腾飞测试【百博时代科技】~~~~~ [通邦支付]状态：发送成功返回内容：<?xml version="1.0" encoding="utf-8"?>
+<string xmlns="http://tempuri.org/">101205051497672488</string>
+
