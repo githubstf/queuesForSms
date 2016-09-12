@@ -28,7 +28,8 @@ public class SendSmsService {
     public SendSmsService(){
     	
     }
-    
+    private String send;
+    private String sms;
     
     
 	/**
